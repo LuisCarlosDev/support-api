@@ -3,12 +3,17 @@ import { TicketsRepository } from '@/repositories/tickets-repository'
 interface CreateTicketUseCaseRequest {
   question: string
   question_type: string
-  impact: 'low' | 'medium' | 'grave'
-  status: 'pending' | 'in progress' | 'finish'
+  impact: string
+  status: string
   user_id: string
+  system_id: string
 }
 
-export class CreateTicket {
+interface CreateTicketUseCaseResponse {
+  ticket: CreateTicketUseCaseRequest
+}
+
+export class CreateTicketUseCase {
   constructor(private ticketRepository: TicketsRepository) {}
 
   async execute({
@@ -17,15 +22,17 @@ export class CreateTicket {
     impact,
     status,
     user_id,
-  }: CreateTicketUseCaseRequest) {
+    system_id,
+  }: CreateTicketUseCaseRequest): Promise<CreateTicketUseCaseResponse> {
     const ticket = await this.ticketRepository.create({
       question,
       question_type,
       impact,
       status,
       user_id,
+      system_id,
     })
 
-    return ticket
+    return { ticket }
   }
 }

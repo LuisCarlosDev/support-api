@@ -5,7 +5,7 @@ import { randomUUID } from 'node:crypto'
 export class InMemoryTickestRepository implements TicketsRepository {
   public items: Ticket[] = []
 
-  async create(data: Prisma.TicketCreateInput) {
+  async create(data: Prisma.TicketUncheckedCreateInput) {
     const ticket = {
       id: randomUUID(),
       question: data.question,
@@ -13,6 +13,7 @@ export class InMemoryTickestRepository implements TicketsRepository {
       impact: data.impact,
       status: data.status,
       user_id: randomUUID(),
+      system_id: randomUUID(),
       created_at: new Date(),
     }
 

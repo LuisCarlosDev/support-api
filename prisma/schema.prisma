@@ -24,22 +24,20 @@ model Ticket {
   question_type String
   impact        String
   status        String
-  user_id       String
   created_at    DateTime @default(now())
 
-  user User @relation(fields: [user_id], references: [id])
-
-  system System[]
+  user      User    @relation(fields: [user_id], references: [id])
+  user_id   String
+  system    System? @relation(fields: [system_id], references: [id])
+  system_id String
 
   @@map("tickets")
 }
 
 model System {
-  id        String @id @default(uuid())
-  name      String
-  ticket_id String
-
-  ticket Ticket @relation(fields: [ticket_id], references: [id])
+  id      String   @id @default(uuid())
+  name    String
+  tickets Ticket[]
 
   @@map("systems")
 }

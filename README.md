@@ -6,7 +6,7 @@ Support SMGBit App
 
 - [x] Deve ser possível se cadastrar;
 - [x] Deve ser possível se autenticar;
-- [] Deve ser possível obter o perfil de um usuário logado;
+- [x] Deve ser possível obter o perfil de um usuário logado;
 - [] Deve ser possível obter o número de tickets feito pelo usuário;
 - [] Deve ser possível criar tickets;
 - [] Deve ser possível apagar um ticket;
