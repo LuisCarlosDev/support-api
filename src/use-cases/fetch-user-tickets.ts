@@ -4,6 +4,7 @@ import { Ticket } from '@prisma/client'
 interface FetchUserTicketsRequest {
   userId: string
   page: number
+  query: string
 }
 
 interface FetchUserTicketsResponse {
@@ -16,8 +17,13 @@ export class FetchUserTickets {
   async execute({
     userId,
     page,
+    query,
   }: FetchUserTicketsRequest): Promise<FetchUserTicketsResponse> {
-    const tickets = await this.ticketsRepository.findManyUserId(userId, page)
+    const tickets = await this.ticketsRepository.findManyUserId(
+      userId,
+      page,
+      query,
+    )
 
     return { tickets }
   }

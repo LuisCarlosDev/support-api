@@ -8,9 +8,10 @@ export async function FetchUserTickets(
 ) {
   const fetchUserTicketsBodySchema = z.object({
     page: z.coerce.number().min(1).default(1),
+    q: z.string().optional(),
   })
 
-  const { page } = fetchUserTicketsBodySchema.parse(request.query)
+  const { page, q } = fetchUserTicketsBodySchema.parse(request.query)
 
   const fetchUserTickets = makeFetchUserTicketUseCase()
 
@@ -19,6 +20,7 @@ export async function FetchUserTickets(
   ).execute({
     page,
     userId: request.user.sub,
+    query: q ?? '',
   })
 
   return reply.status(200).send({ tickets })

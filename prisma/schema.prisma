@@ -14,6 +14,7 @@ model User {
   password_hash String
   created_at    DateTime @default(now())
   tickets       Ticket[]
+  systems       System[]
 
   @@map("users")
 }
@@ -35,8 +36,12 @@ model Ticket {
 }
 
 model System {
-  id      String   @id @default(uuid())
-  name    String
+  id   String @id @default(uuid())
+  name String
+
+  user    User   @relation(fields: [user_id], references: [id])
+  user_id String
+
   tickets Ticket[]
 
   @@map("systems")

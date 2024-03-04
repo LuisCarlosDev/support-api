@@ -34,6 +34,7 @@ describe('Fetch User Tickets Use Case', () => {
     const { tickets } = await sut.execute({
       userId: 'user-01',
       page: 1,
+      query: '',
     })
 
     expect(tickets).toHaveLength(2)
