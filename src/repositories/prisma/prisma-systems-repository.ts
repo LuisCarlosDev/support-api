@@ -9,7 +9,6 @@ export class PrismaSystemsRepository implements SystemsRepository {
         user_id: userId,
         name: {
           contains: query,
-          mode: 'insensitive',
         },
       },
       take: 20,

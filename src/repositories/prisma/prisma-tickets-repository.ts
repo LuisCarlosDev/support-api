@@ -9,11 +9,13 @@ export class PrismaTicketsRepository implements TicketsRepository {
         user_id: userId,
         impact: {
           contains: query,
-          mode: 'insensitive',
         },
       },
       include: {
         system: true,
+      },
+      orderBy: {
+        created_at: 'desc',
       },
       skip: (page - 1) * 20,
       take: 20,
@@ -35,7 +37,6 @@ export class PrismaTicketsRepository implements TicketsRepository {
       where: {
         impact: {
           contains: query,
-          mode: 'insensitive',
         },
       },
       take: 20,
